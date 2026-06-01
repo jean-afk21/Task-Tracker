@@ -4,14 +4,15 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
+require_once __DIR__ . '/public/database.config.php';
+
 if (isset($_SESSION['account_id'])) {
-    header("Location: /TaskTrackingSystem/views/dashboard/dashboard.php");
+    header("Location: " . BASE_URL . "/views/dashboard/dashboard.php");
     exit();
 }
 
 require_once __DIR__ . '/models/account.php';
 require_once __DIR__ . '/controllers/account.php';
-require_once __DIR__ . '/public/database.config.php';
 
 $errors  = "";
 $message = "";
@@ -28,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
         $result      = $controller->login($credentials->username, $credentials->password);
 
         if ($result) {
-            header("Location: /TaskTrackingSystem/views/dashboard/dashboard.php");
+            header("Location: " . BASE_URL . "/views/dashboard/dashboard.php");
             exit();
         } else {
             $errors = "Invalid username or password.";
@@ -40,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
 
 <div class="auth-container flex-center">
     <div class="card auth-card">
-
         <div style="text-align:center; margin-bottom:1.5rem;">
             <div class="auth-logo">&#10003;</div>
             <h1 class="auth-title">Task Tracker</h1>
@@ -50,7 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
         <?php if (!empty($message)): ?>
             <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
         <?php endif; ?>
-
         <?php if (!empty($errors)): ?>
             <div class="alert alert-danger"><?= htmlspecialchars($errors) ?></div>
         <?php endif; ?>
@@ -76,9 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
 
         <p style="text-align:center; margin-top:1.25rem; margin-bottom:0; font-size:0.9rem;">
             Don't have an account?
-            <a href="/TaskTrackingSystem/views/auth/register.php"><strong>Register here</strong></a>
+            <a href="<?= BASE_URL ?>/views/auth/register.php"><strong>Register here</strong></a>
         </p>
-
     </div>
 </div>
 

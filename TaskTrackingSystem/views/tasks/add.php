@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_task"])) {
     } else {
         $result = $controller->addTask($account_id, $title, $description, $due_date, $priority, $category);
         if ($result) {
-            // Redirect back to dashboard after successful save.
+            $_SESSION['motivation'] = 'Another task, another step forward.';
             header("Location: /TaskTrackingSystem/views/dashboard/dashboard.php");
             exit();
         } else {

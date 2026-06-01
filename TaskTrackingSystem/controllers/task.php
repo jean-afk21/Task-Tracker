@@ -19,12 +19,19 @@ class TaskController {
         }
     }
 
-    // Get all tasks for the given user account.
-    function getAllTasks($account_id) {
-        $stmt = $this->conn->prepare(
-            "SELECT * FROM tasks WHERE account_id = ? ORDER BY created_at DESC"
-        );
-        $stmt->bind_param("i", $account_id);
+    // Get all tasks for the given user account, with optional search filtering.
+    function getAllTasks($account_id, $searchTerm = '') {
+        if (strlen($searchTerm) > 0) {
+            $query = "SELECT * FROM tasks WHERE account_id = ? AND (title LIKE ? OR description LIKE ? OR category LIKE ? OR priority LIKE ? OR status LIKE ?) ORDER BY created_at DESC";
+            $searchParam = '%' . $searchTerm . '%';
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("isssss", $account_id, $searchParam, $searchParam, $searchParam, $searchParam, $searchParam);
+        } else {
+            $stmt = $this->conn->prepare(
+                "SELECT * FROM tasks WHERE account_id = ? ORDER BY created_at DESC"
+            );
+            $stmt->bind_param("i", $account_id);
+        }
         $stmt->execute();
         return $stmt->get_result();
     }
