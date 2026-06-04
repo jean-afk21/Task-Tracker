@@ -53,9 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
     <div class="card auth-card">
 
         <div style="text-align:center; margin-bottom:1.5rem;">
-            <div class="auth-logo">&#10003;</div>
-            <h1 class="auth-title">Create Account</h1>
-            <p class="auth-subtitle">Join Task Tracker today</p>
+            <div class="auth-logo">🐜</div>
+            <h1 class="auth-title">Join Antrack</h1>
+            <p class="auth-subtitle">Small steps. Big progress.</p>
         </div>
 
         <?php if (!empty($message)): ?>

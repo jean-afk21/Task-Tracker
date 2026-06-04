@@ -17,8 +17,8 @@ elseif ($currentDir  === 'tasks')          { $active = 'tasks'; }
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Tracker</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles.css?v=5">
+    <title>Antrack</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles.css?v=6">
 </head>
 <body>
 
@@ -29,7 +29,7 @@ elseif ($currentDir  === 'tasks')          { $active = 'tasks'; }
             <div class="sidebar-avatar"><?= strtoupper(substr($nav_username ?: 'U', 0, 2)) ?></div>
             <div>
                 <p class="sidebar-user-name"><?= $nav_username ?></p>
-                <p class="sidebar-user-role">Task Tracker</p>
+                <p class="sidebar-user-role">Antrack</p>
             </div>
         </div>
         <nav class="sidebar-nav">
@@ -72,7 +72,7 @@ elseif ($currentDir  === 'tasks')          { $active = 'tasks'; }
 <?php else: ?>
     <nav class="navbar">
         <div class="container flex-between">
-            <span class="nav-brand">&#10003; Task Tracker</span>
+            <span class="nav-brand">🐜 Antrack</span>
             <div class="nav-links">
                 <a href="<?= BASE_URL ?>/index.php">Login</a>
                 <a href="<?= BASE_URL ?>/views/auth/register.php">Register</a>

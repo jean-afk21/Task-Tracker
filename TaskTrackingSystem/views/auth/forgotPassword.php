@@ -47,9 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["forgot"])) {
     <div class="card auth-card">
 
         <div style="text-align:center; margin-bottom:1.5rem;">
-            <div class="auth-logo">&#128274;</div>
-            <h1 class="auth-title">Forgot Password</h1>
-            <p class="auth-subtitle">Enter your email to receive a reset link</p>
+            <div class="auth-logo">🐜</div>
+            <h1 class="auth-title">Forgot Password?</h1>
+            <p class="auth-subtitle">We'll send you a reset link</p>
         </div>
 
         <?php if (!empty($message)): ?>

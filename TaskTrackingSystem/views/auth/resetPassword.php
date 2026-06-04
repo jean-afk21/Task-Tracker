@@ -58,11 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["reset"]) && $validTok
     <div class="card auth-card">
 
         <div style="text-align:center; margin-bottom:1.5rem;">
-            <div class="auth-logo">&#128272;</div>
+            <div class="auth-logo">🐜</div>
             <h1 class="auth-title">Reset Password</h1>
-            <p class="auth-subtitle">Choose a new password for your account</p>
-        </div>
-
+            <p class="auth-subtitle">Choose a new password for your Antrack account</p>
+       </div>
         <?php if (!empty($message)): ?>
             <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
             <p style="text-align:center; margin-top:1rem;">
