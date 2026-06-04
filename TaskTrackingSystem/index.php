@@ -52,7 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
     <div class="card auth-card">
 
         <div style="text-align:center; margin-bottom:1.5rem;">
-            <div class="auth-logo">🐜</div>
+            <div class="auth-logo">
+    <img src="<?= BASE_URL ?>/favicon.ico" alt="Antrack" style="width:36px; height:36px;">
+</div>
             <h1 class="auth-title">Antrack</h1>
             <p class="auth-subtitle">Small steps. Big progress.</p>
         </div>
