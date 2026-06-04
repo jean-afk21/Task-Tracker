@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antrack — Sign In</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles.css">
-    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/public/images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/favicon.ico">
 </head>
 <body>
 
