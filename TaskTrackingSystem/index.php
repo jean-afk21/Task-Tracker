@@ -329,40 +329,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
 
         <!-- Illustration -->
         <div class="brand-illustration">
-            <svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <!-- Background card shapes -->
-                <rect x="10" y="30" width="340" height="180" rx="18" fill="rgba(255,255,255,0.06)"/>
-
-                <!-- Task rows -->
-                <rect x="30" y="60" width="300" height="38" rx="10" fill="rgba(255,255,255,0.09)"/>
-                <circle cx="55" cy="79" r="10" fill="rgba(167,139,250,0.5)"/>
-                <text x="69" y="83" font-size="11" fill="rgba(255,255,255,0.85)" font-family="sans-serif">Design the homepage layout</text>
-                <rect x="290" y="71" width="30" height="16" rx="8" fill="rgba(167,139,250,0.4)"/>
-                <text x="298" y="83" font-size="9" fill="white" font-family="sans-serif">High</text>
-
-                <rect x="30" y="108" width="300" height="38" rx="10" fill="rgba(255,255,255,0.09)"/>
-                <circle cx="55" cy="127" r="10" fill="rgba(52,211,153,0.5)"/>
-                <!-- checkmark inside -->
-                <text x="49" y="132" font-size="13" fill="white" font-family="sans-serif">✓</text>
-                <text x="69" y="131" font-size="11" fill="rgba(255,255,255,0.45)" font-family="sans-serif" text-decoration="line-through">Write project proposal</text>
-                <rect x="290" y="119" width="38" height="16" rx="8" fill="rgba(52,211,153,0.35)"/>
-                <text x="294" y="131" font-size="9" fill="#6ee7b7" font-family="sans-serif">Done ✓</text>
-
-                <rect x="30" y="156" width="300" height="38" rx="10" fill="rgba(255,255,255,0.09)"/>
-                <circle cx="55" cy="175" r="10" fill="rgba(251,191,36,0.5)"/>
-                <text x="69" y="179" font-size="11" fill="rgba(255,255,255,0.85)" font-family="sans-serif">Review team feedback</text>
-                <rect x="286" y="167" width="34" height="16" rx="8" fill="rgba(251,191,36,0.3)"/>
-                <text x="292" y="179" font-size="9" fill="#fcd34d" font-family="sans-serif">Med</text>
-
-                <!-- Floating ant accent -->
-                <text x="310" y="50" font-size="28" font-family="sans-serif" opacity="0.5">🐜</text>
-                <text x="20" y="220" font-size="18" font-family="sans-serif" opacity="0.3">🐜</text>
-
-                <!-- Progress bar at bottom -->
-                <rect x="30" y="205" width="300" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
-                <rect x="30" y="205" width="195" height="6" rx="3" fill="rgba(167,139,250,0.7)"/>
-                <text x="30" y="222" font-size="9" fill="rgba(255,255,255,0.45)" font-family="sans-serif">65% complete · 2 of 3 tasks done</text>
-            </svg>
+            <img
+                src="<?= BASE_URL ?>/public/images/logo.png"
+                alt="Antrack — task tracking illustration"
+                style="width:100%; max-width:380px; border-radius:16px; opacity:0.92;"
+            >
         </div>
 
         <h1 class="brand-tagline">Small steps.<br><span>Big progress.</span></h1>
