@@ -19,7 +19,7 @@ $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
     $username = trim($_POST["username"] ?? "");
-    $password = $_POST["password"] ?? "";
+    $password = $_POST["password"]      ?? "";
 
     if (empty($username) || empty($password)) {
         $errors = "Please fill in all fields.";
@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
 
 <div class="auth-container flex-center">
     <div class="card auth-card">
+
         <div style="text-align:center; margin-bottom:1.5rem;">
             <div class="auth-logo">&#10003;</div>
             <h1 class="auth-title">Task Tracker</h1>
@@ -67,6 +68,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
                 <input type="password" id="password" name="password"
                     placeholder="Enter your password" required>
             </div>
+
+            <!-- Forgot password link -->
+            <div style="text-align:left; margin-top:-0.5rem; margin-bottom:1rem;">
+                <a href="<?= BASE_URL ?>/views/auth/forgot-password.php"
+                   style="font-size:0.83rem; color:var(--muted);">
+                    Forgot password?
+                </a>
+            </div>
+
             <button type="submit" name="login" class="btn btn-primary"
                 style="width:100%; padding:0.65rem;">
                 Sign In
@@ -77,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
             Don't have an account?
             <a href="<?= BASE_URL ?>/views/auth/register.php"><strong>Register here</strong></a>
         </p>
+
     </div>
 </div>
 

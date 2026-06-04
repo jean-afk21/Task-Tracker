@@ -19,25 +19,30 @@ $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
     $username = trim($_POST["username"] ?? "");
-    $password = $_POST["password"] ?? "";
+    $email    = trim($_POST["email"]    ?? "");
+    $password = $_POST["password"]      ?? "";
     $confirm  = $_POST["confirm_password"] ?? "";
 
-    if (empty($username) || empty($password) || empty($confirm)) {
+    if (empty($username) || empty($email) || empty($password) || empty($confirm)) {
         $errors = "Please fill in all fields.";
     } elseif (strlen($username) < 3) {
         $errors = "Username must be at least 3 characters long.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors = "Please enter a valid email address.";
     } elseif (strlen($password) < 6) {
         $errors = "Password must be at least 6 characters long.";
     } elseif ($password !== $confirm) {
         $errors = "Passwords do not match.";
     } else {
         $controller = new AccountController($SERVER_NAME, $USERNAME, $PASSWORD, $DB_NAME);
-        $result     = $controller->register($username, $password);
+        $result     = $controller->register($username, $email, $password);
 
-        if ($result) {
+        if ($result === 'ok') {
             $message = "Account created successfully! You can now log in.";
+        } elseif ($result === 'taken') {
+            $errors = "That username or email is already taken. Please choose another.";
         } else {
-            $errors = "That username is already taken. Please choose another.";
+            $errors = "Something went wrong. Please try again.";
         }
     }
 }
@@ -46,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
 
 <div class="auth-container flex-center">
     <div class="card auth-card">
+
         <div style="text-align:center; margin-bottom:1.5rem;">
             <div class="auth-logo">&#10003;</div>
             <h1 class="auth-title">Create Account</h1>
@@ -63,8 +69,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username"
-                    placeholder="Choose a username (min 3 characters)"
+                    placeholder="At least 3 characters"
                     value="<?= htmlspecialchars($_POST['username'] ?? '') ?>"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email"
+                    placeholder="you@example.com"
+                    value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
                     required>
             </div>
             <div class="form-group">
@@ -87,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
             Already have an account?
             <a href="<?= BASE_URL ?>/index.php"><strong>Sign in</strong></a>
         </p>
+
     </div>
 </div>
 

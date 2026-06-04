@@ -19,23 +19,23 @@ class AccountController {
         }
     }
 
-    function register($username, $password) {
+    function register($username, $email, $password) {
         // Check if username is already taken
-        $check = $this->conn->prepare("SELECT id FROM accounts WHERE username = ?");
-        $check->bind_param("s", $username);
+        $check = $this->conn->prepare("SELECT id FROM accounts WHERE username = ? OR email = ?");
+        $check->bind_param("ss", $username, $email);
         $check->execute();
         $check->store_result();
 
         if ($check->num_rows > 0) {
-            return false;
+            return 'taken'; // username or email already exists
         }
 
         // Hash the password before saving — never store plain text
         $hashed = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $this->conn->prepare("INSERT INTO accounts (username, password) VALUES (?, ?)");
-        $stmt->bind_param("ss", $username, $hashed);
-        return $stmt->execute();
+        $stmt = $this->conn->prepare("INSERT INTO accounts (username, email, password) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $username, $email, $hashed);
+        return $stmt->execute() ? 'ok' : 'error';
     }
 
     function login($username, $password) {
@@ -47,9 +47,68 @@ class AccountController {
         if ($result && password_verify($password, $result['password'])) {
             $_SESSION['account_id'] = $result['id'];
             $_SESSION['username']   = $result['username'];
+            $_SESSION['email']      = $result['email'];
             return true;
         }
         return false;
+    }
+
+    function forgotPassword($email) {
+        // Check if email exists
+        $stmt = $this->conn->prepare("SELECT id FROM accounts WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows === 0) {
+            return false; // email not found
+        }
+
+        // Delete any existing reset tokens for this email
+        $delete = $this->conn->prepare("DELETE FROM password_resets WHERE email = ?");
+        $delete->bind_param("s", $email);
+        $delete->execute();
+
+        // Generate a secure random token
+        $token     = bin2hex(random_bytes(32));
+        $expiresAt = date('Y-m-d H:i:s', strtotime('+1 hour'));
+
+        $insert = $this->conn->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
+        $insert->bind_param("sss", $email, $token, $expiresAt);
+        $insert->execute();
+
+        return $token;
+    }
+
+    function validateResetToken($token) {
+        $stmt = $this->conn->prepare(
+            "SELECT email FROM password_resets WHERE token = ? AND expires_at > NOW()"
+        );
+        $stmt->bind_param("s", $token);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result ? $result['email'] : false;
+    }
+
+    function resetPassword($token, $newPassword) {
+        $email = $this->validateResetToken($token);
+
+        if (!$email) {
+            return false; // Token invalid or expired
+        }
+
+        $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        $update = $this->conn->prepare("UPDATE accounts SET password = ? WHERE email = ?");
+        $update->bind_param("ss", $hashed, $email);
+        $update->execute();
+
+        // Delete used token
+        $delete = $this->conn->prepare("DELETE FROM password_resets WHERE token = ?");
+        $delete->bind_param("s", $token);
+        $delete->execute();
+
+        return true;
     }
 
     function update($id, $username, $password) {
