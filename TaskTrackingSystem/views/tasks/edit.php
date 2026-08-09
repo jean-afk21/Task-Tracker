@@ -121,4 +121,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["edit_task"])) {
 
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    if (!form) return;
+
+    const focusableFields = Array.from(form.querySelectorAll('input:not([type=hidden]), select'))
+        .filter(el => !el.disabled);
+    const submitButton = form.querySelector('[type="submit"]');
+
+    focusableFields.forEach((field, index) => {
+        field.addEventListener('keydown', function (event) {
+            if (event.key !== 'Enter') return;
+            event.preventDefault();
+
+            const nextField = focusableFields[index + 1];
+            if (nextField) {
+                nextField.focus();
+                if (typeof nextField.select === 'function') {
+                    nextField.select();
+                }
+            } else if (submitButton) {
+                submitButton.click();
+            } else {
+                form.submit();
+            }
+        });
+    });
+});
+</script>
+
 <?php require __DIR__ . '/../partial/footer.php'; ?>
