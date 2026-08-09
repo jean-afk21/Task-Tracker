@@ -6,7 +6,7 @@ session_start();
 
 // If no user is logged in, send them back to the login page.
 if (!isset($_SESSION['account_id'])) {
-    header("Location: /TaskTrackingSystem/index.php");
+    header("Location: " . BASE_URL . "/index.php");
     exit();
 }
 
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_task"])) {
         $result = $controller->addTask($account_id, $title, $description, $due_date, $priority, $category);
         if ($result) {
             $_SESSION['motivation'] = 'Another task, another step forward.';
-            header("Location: /TaskTrackingSystem/views/dashboard/dashboard.php");
+            header("Location: " . BASE_URL . "/views/dashboard/dashboard.php");
             exit();
         } else {
             $errors = "Could not add task. Please try again.";
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_task"])) {
 
     <div class="flex-between mb-2">
         <h2>Add New Task</h2>
-        <a href="/TaskTrackingSystem/views/dashboard/dashboard.php" class="btn btn-secondary">&larr; Back to Dashboard</a>
+        <a href="<?= BASE_URL ?>/views/dashboard/dashboard.php" class="btn btn-secondary">&larr; Back to Dashboard</a>
     </div>
 
     <?php if (!empty($errors)): ?>
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_task"])) {
             </div>
             <div class="flex" style="gap:0.75rem;">
                 <button type="submit" name="add_task" class="btn btn-primary">Add Task</button>
-                <a href="/TaskTrackingSystem/views/dashboard/dashboard.php" class="btn btn-secondary">Cancel</a>
+                <a href="<?= BASE_URL ?>/views/dashboard/dashboard.php" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

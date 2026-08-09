@@ -3,14 +3,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
+require_once __DIR__ . '/../../public/database.config.php';
 
 if (!isset($_SESSION['account_id'])) {
-    header("Location: /TaskTrackingSystem/index.php");
+    header("Location: " . BASE_URL . "/index.php");
     exit();
 }
 
 require_once __DIR__ . '/../../controllers/task.php';
-require_once __DIR__ . '/../../public/database.config.php';
 
 $account_id = (int)$_SESSION['account_id'];
 $controller = new TaskController($SERVER_NAME, $USERNAME, $PASSWORD, $DB_NAME);
@@ -28,13 +28,7 @@ $tasks = $controller->getAllTasks($account_id, $searchTerm);
                 <h1>Your task list</h1>
                 <p class="section-subtitle">Manage all of your tasks from one place.</p>
             </div>
-            <a href="/TaskTrackingSystem/views/tasks/add.php" class="btn btn-primary btn-pill">New task</a>
-        </div>
-
-        <div class="search-panel" style="margin-bottom:1.25rem;">
-            <form method="GET" class="search-form">
-                <label class="sr-only" for="taskSearch">Search tasks</label>
-                <input id="taskSearch" type="search" name="search" value="<?= htmlspecialchars($searchTerm) ?>" placeholder="Search title, description, category, or status" autocomplete="off">
+                    <a href="<?= BASE_URL ?>/views/tasks/add.php" class="btn btn-primary btn-pill">New task</a>
             </form>
         </div>
 
@@ -48,7 +42,7 @@ $tasks = $controller->getAllTasks($account_id, $searchTerm);
                     <h3>No tasks yet</h3>
                     <p>Create your first task to get started.</p>
                 <?php endif; ?>
-                <a href="/TaskTrackingSystem/views/tasks/add.php" class="btn btn-primary btn-pill">Create a task</a>
+                <a href="<?= BASE_URL ?>/views/tasks/add.php" class="btn btn-primary btn-pill">Create a task</a>
             </div>
         <?php else: ?>
             <div class="task-list">
@@ -77,7 +71,7 @@ $tasks = $controller->getAllTasks($account_id, $searchTerm);
                             <span class="priority-pill priority-<?= strtolower($task['priority'] ?? 'Medium') ?>">
                                 <?= htmlspecialchars($task['priority'] ?? 'Medium') ?>
                             </span>
-                            <a href="/TaskTrackingSystem/views/tasks/edit.php?id=<?= (int)$task['id'] ?>" class="btn btn-secondary btn-sm">Adjust</a>
+                            <a href="<?= BASE_URL ?>/views/tasks/edit.php?id=<?= (int)$task['id'] ?>" class="btn btn-secondary btn-sm">Adjust</a>
                         </div>
                     </article>
                 <?php endwhile; ?>
