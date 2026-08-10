@@ -53,8 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
     <div class="card auth-card">
 
         <div style="text-align:center; margin-bottom:1.5rem;">
-            <div class="auth-logo">🐜</div>
-            <h1 class="auth-title">Join Antrack</h1>
+            <div class="auth-logo">
+                <img src="<?= BASE_URL ?>/public/images/logo.png" alt="Antrack" style="width:36px; height:36px;">
+            </div>
+            <h1 class="auth-title">Antrack</h1>
             <p class="auth-subtitle">Small steps. Big progress.</p>
         </div>
 
@@ -103,5 +105,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
 
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    if (!form) return;
+
+    const focusableFields = Array.from(form.querySelectorAll('input:not([type=hidden]), select'))
+        .filter(el => !el.disabled);
+    const submitButton = form.querySelector('[type="submit"]');
+
+    focusableFields.forEach((field, index) => {
+        field.addEventListener('keydown', function (event) {
+            if (event.key !== 'Enter') return;
+            event.preventDefault();
+
+            const nextField = focusableFields[index + 1];
+            if (nextField) {
+                nextField.focus();
+                if (typeof nextField.select === 'function') {
+                    nextField.select();
+                }
+            } else if (submitButton) {
+                submitButton.click();
+            } else {
+                form.submit();
+            }
+        });
+    });
+});
+</script>
 
 <?php require __DIR__ . '/../partial/footer.php'; ?>
