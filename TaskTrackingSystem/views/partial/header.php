@@ -38,7 +38,7 @@ elseif ($currentDir  === 'tasks')          { $active = 'tasks'; }
                 <span class="sidebar-icon">🏠</span>
                 <span>Dashboard</span>
             </a>
-            <a href="<?= BASE_URL ?>/views/tasks/tasks.php"
+            <a href="<?= BASE_URL ?>/views/tasks/index.php"
                class="sidebar-item <?= $active === 'tasks' ? 'active' : '' ?>">
                 <span class="sidebar-icon">🗂</span>
                 <span>Tasks</span>

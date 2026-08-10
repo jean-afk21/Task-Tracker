@@ -93,4 +93,14 @@ class TaskController {
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
+
+    // Get upcoming tasks with due dates ordered by date
+    function getUpcomingTasks($account_id, $limit = 5) {
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM tasks WHERE account_id = ? AND status = 'pending' AND due_date IS NOT NULL ORDER BY due_date ASC LIMIT ?"
+        );
+        $stmt->bind_param("ii", $account_id, $limit);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
 }

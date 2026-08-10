@@ -47,131 +47,203 @@ $counts = $controller->getTaskCounts($account_id);
 ?>
 <?php require __DIR__ . '/../partial/header.php'; ?>
 
-<div class="container section dashboard-page">
-
-    <?php if (!empty($message)): ?>
-        <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
-    <?php endif; ?>
-    <?php if (!empty($errors)): ?>
-        <div class="alert alert-danger"><?= htmlspecialchars($errors) ?></div>
-    <?php endif; ?>
-
-    <div class="dashboard-content">
-
-        <section class="dashboard-header card header-card">
-            <div class="header-copy-preview">
-                <p class="eyebrow">Happy working</p>
-                <h1>Hi, <?= htmlspecialchars($_SESSION['username'] ?? 'User') ?>.</h1>
-                <p class="subheading">Progress is progress — big or small.</p>
-            </div>
-            <div class="header-actions">
-                <div class="date-pill"><?= date('l, F j') ?></div>
-                <a href="<?= BASE_URL ?>/views/tasks/add.php" class="btn btn-primary btn-pill">New task</a>
-            </div>
-        </section>
-
-        <?php if (!empty($motivation)): ?>
-        <section class="motivation-banner card">
-            <p class="motivation-text"><?= htmlspecialchars($motivation) ?></p>
-        </section>
+<div class="dashboard-wrapper">
+    <div class="dashboard-container">
+        <?php if (!empty($message)): ?>
+            <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
+        <?php endif; ?>
+        <?php if (!empty($errors)): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($errors) ?></div>
         <?php endif; ?>
 
-        <section class="card stats-panel">
-            <div class="section-title-row">
-                <div>
-                    <h3>Stats</h3>
-                    <p class="section-subtitle">Your current task summary</p>
+        <!-- Header Section -->
+        <section class="dashboard-header-section">
+            <div class="header-left">
+                <p class="header-greeting">Hi, <?= htmlspecialchars($_SESSION['username'] ?? 'User') ?>.</p>
+                <p class="header-subtitle">Progress is progress — big or small.</p>
+            </div>
+            <div class="header-right">
+                <div class="date-display"><?= date('l, F j') ?></div>
+                <a href="<?= BASE_URL ?>/views/tasks/add.php" class="btn btn-primary btn-new-task">+ New task</a>
+            </div>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="stats-section">
+            <div class="stat-box">
+                <div class="stat-icon stat-icon-tasks">📋</div>
+                <div class="stat-content">
+                    <div class="stat-value"><?= (int)($counts['total'] ?? 0) ?></div>
+                    <div class="stat-label">Total tasks</div>
                 </div>
             </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span><?= (int)($counts['total'] ?? 0) ?></span>
-                    <p>Total tasks</p>
+            <div class="stat-box">
+                <div class="stat-icon stat-icon-completed">✅</div>
+                <div class="stat-content">
+                    <div class="stat-value"><?= (int)($counts['finished'] ?? 0) ?></div>
+                    <div class="stat-label">Completed</div>
                 </div>
-                <div class="stat-card">
-                    <span><?= (int)($counts['finished'] ?? 0) ?></span>
-                    <p>Completed</p>
+            </div>
+            <div class="stat-box">
+                <div class="stat-icon stat-icon-pending">⏱️</div>
+                <div class="stat-content">
+                    <div class="stat-value"><?= max(0, (int)($counts['total'] ?? 0) - (int)($counts['finished'] ?? 0)) ?></div>
+                    <div class="stat-label">Pending</div>
                 </div>
-                <div class="stat-card">
-                    <span><?= max(0, (int)($counts['total'] ?? 0) - (int)($counts['finished'] ?? 0)) ?></span>
-                    <p>Pending</p>
-                </div>
-                <div class="stat-card wide-card">
-                    <span><?= ((int)($counts['total'] ?? 0) > 0)
+            </div>
+            <div class="stat-box stat-box-rate">
+                <div class="stat-content">
+                    <div class="stat-value-rate"><?= ((int)($counts['total'] ?? 0) > 0)
                         ? round(((int)($counts['finished'] ?? 0) / (int)($counts['total'] ?? 1)) * 100)
-                        : 0 ?>%</span>
-                    <p>Completion rate</p>
+                        : 0 ?>%</div>
+                    <div class="stat-label">Completion rate</div>
                 </div>
             </div>
         </section>
 
-        <section class="card tasks-today-card">
-            <div class="section-title-row">
-                <div>
-                    <h2>Today's focus</h2>
-                    <p class="section-subtitle">Your priorities right now.</p>
-                </div>
-                <span class="task-count"><?= $tasks->num_rows ?> items</span>
+        <!-- Task Overview Chart -->
+        <section class="task-overview-section">
+            <div class="section-header">
+                <h3>Task Overview</h3>
+                <select class="time-filter">
+                    <option>This Week</option>
+                    <option>This Month</option>
+                    <option>All Time</option>
+                </select>
             </div>
+            <div class="chart-container">
+                <canvas id="taskChart"></canvas>
+            </div>
+        </section>
 
-            <?php if ($tasks->num_rows === 0): ?>
-            <div class="empty-state card-empty">
-                <div class="empty-state-icon">✓</div>
-                <h3>All caught up!</h3>
-                <p>Everything's done. Start fresh with a new task.</p>
-                <a href="<?= BASE_URL ?>/views/tasks/add.php" class="btn btn-primary btn-pill">Create a task</a>
-            </div>
-            <?php else: ?>
-            <div class="task-list">
-                <?php while ($task = $tasks->fetch_assoc()): ?>
-                <article class="task-row <?= $task['status'] === 'complete' ? 'task-complete' : 'task-pending' ?>">
-                    <div class="task-row-main">
-                        <div class="task-checkbox">
+        <!-- Main Content Grid -->
+        <div class="dashboard-grid">
+            <!-- Recent Tasks -->
+            <section class="recent-tasks-section">
+                <div class="section-header">
+                    <h3>Recent Tasks</h3>
+                    <a href="<?= BASE_URL ?>/views/tasks/index.php" class="view-all-link">View all</a>
+                </div>
+
+                <?php if ($tasks->num_rows === 0): ?>
+                <div class="empty-state">
+                    <div class="empty-state-icon">📋</div>
+                    <h4>No tasks yet</h4>
+                    <p>You haven't added any tasks.</p>
+                    <a href="<?= BASE_URL ?>/views/tasks/add.php" class="btn btn-primary">Create your first task</a>
+                </div>
+                <?php else: ?>
+                <div class="recent-tasks-list">
+                    <?php 
+                    $count = 0;
+                    while ($task = $tasks->fetch_assoc() && $count < 5): 
+                        $count++;
+                    ?>
+                    <div class="task-item <?= $task['status'] === 'complete' ? 'task-item-complete' : '' ?>">
+                        <div class="task-item-check">
                             <?php if ($task['status'] === 'complete'): ?>
-                                <span class="checkbox checked">✔</span>
+                                <span class="task-checkbox checked">✔</span>
                             <?php else: ?>
-                                <span class="checkbox"></span>
+                                <span class="task-checkbox"></span>
                             <?php endif; ?>
                         </div>
-                        <div>
-                            <h3><?= htmlspecialchars($task['title']) ?></h3>
-                            <p class="task-meta"><?= htmlspecialchars($task['description'] ?? 'No description provided.') ?></p>
-                            <div class="task-label-row">
-                                <span class="category-badge"><?= htmlspecialchars($task['category'] ?? 'Personal') ?></span>
-                                <?php if (!empty($task['due_date'])): ?>
-                                    <span class="due-date">Due <?= htmlspecialchars(date('M j, Y', strtotime($task['due_date']))) ?></span>
-                                <?php endif; ?>
-                            </div>
+                        <div class="task-item-content">
+                            <h4><?= htmlspecialchars($task['title']) ?></h4>
+                            <p><?= htmlspecialchars(substr($task['description'] ?? '', 0, 50)) ?></p>
+                        </div>
+                        <div class="task-item-priority">
+                            <span class="priority-badge priority-<?= strtolower($task['priority'] ?? 'medium') ?>">
+                                <?= htmlspecialchars($task['priority'] ?? 'Medium') ?>
+                            </span>
                         </div>
                     </div>
-                    <div class="task-row-actions">
-                        <?php $priority = $task['priority'] ?? 'Medium'; ?>
-                        <span class="priority-pill priority-<?= strtolower($priority) ?>">
-                            <?= htmlspecialchars($priority) ?>
-                        </span>
-                        <div class="task-action-buttons">
-                            <?php if ($task['status'] === 'pending'): ?>
-                            <form method="POST" class="action-form">
-                                <input type="hidden" name="task_id" value="<?= (int)$task['id'] ?>">
-                                <button type="submit" name="complete_task" class="btn btn-success btn-sm">Done</button>
-                            </form>
-                            <?php endif; ?>
-                            <a href="<?= BASE_URL ?>/views/tasks/edit.php?id=<?= (int)$task['id'] ?>"
-                               class="btn btn-secondary btn-sm">Adjust</a>
-                            <form method="POST" class="action-form"
-                                  onsubmit="return confirm('Delete this task?');">
-                                <input type="hidden" name="task_id" value="<?= (int)$task['id'] ?>">
-                                <button type="submit" name="delete_task" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </article>
-                <?php endwhile; ?>
-            </div>
-            <?php endif; ?>
-        </section>
+                    <?php endwhile; ?>
+                </div>
+                <?php endif; ?>
+            </section>
 
+            <!-- Upcoming Tasks -->
+            <section class="upcoming-tasks-section">
+                <div class="section-header">
+                    <h3>Upcoming Tasks</h3>
+                </div>
+
+                <?php
+                $upcomingTasks = $controller->getUpcomingTasks($account_id, 5);
+                if ($upcomingTasks && $upcomingTasks->num_rows > 0):
+                ?>
+                <div class="upcoming-tasks-list">
+                    <?php while ($task = $upcomingTasks->fetch_assoc()): ?>
+                    <div class="upcoming-task-item">
+                        <div class="task-date"><?= htmlspecialchars(date('M j', strtotime($task['due_date']))) ?></div>
+                        <div class="task-details">
+                            <h5><?= htmlspecialchars($task['title']) ?></h5>
+                            <p><?= htmlspecialchars($task['category'] ?? 'Personal') ?></p>
+                        </div>
+                    </div>
+                    <?php endwhile; ?>
+                </div>
+                <?php else: ?>
+                <div class="empty-state-small">
+                    <p>No upcoming tasks</p>
+                    <p class="text-muted">You're all caught up! Nice work.</p>
+                </div>
+                <?php endif; ?>
+            </section>
+        </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Task Overview Chart
+    const ctx = document.getElementById('taskChart');
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [
+                    {
+                        label: 'Completed',
+                        data: [0, 0, 0, 0, 0, 0, 0],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#10b981'
+                    },
+                    {
+                        label: 'Pending',
+                        data: [0, 0, 0, 0, 0, 0, 0],
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#f59e0b'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 4
+                    }
+                }
+            }
+        });
+    }
+</script>
 
 <?php require __DIR__ . '/../partial/footer.php'; ?>
