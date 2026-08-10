@@ -24,10 +24,10 @@ class AccountController {
     private function ensurePasswordResetsTable() {
         $sql = "CREATE TABLE IF NOT EXISTS `password_resets` (
             `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-            `email` VARCHAR(255) NOT NULL,
+            `email` VARCHAR(191) NOT NULL,
             `token` VARCHAR(128) NOT NULL,
             `expires_at` DATETIME NOT NULL,
-            `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`),
             UNIQUE KEY `token_unique` (`token`),
             KEY `email_index` (`email`)
