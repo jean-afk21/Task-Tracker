@@ -41,15 +41,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["forgot"])) {
     }
 }
 ?>
-<?php require __DIR__ . '/../partial/header.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antrack — Forgot Password</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles.css">
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/favicon.ico">
+</head>
+<body>
 
 <div class="auth-container flex-center">
     <div class="card auth-card">
 
         <div style="text-align:center; margin-bottom:1.5rem;">
-            <div class="auth-logo">🐜</div>
+            <img src="<?= BASE_URL ?>/public/images/logo.png" alt="Antrack" style="width:36px; height:36px;">
             <h1 class="auth-title">Forgot Password?</h1>
-            <p class="auth-subtitle">We'll send you a reset link</p>
+            <p class="auth-subtitle">Enter your email and we’ll send you a reset link</p>
         </div>
 
         <?php if (!empty($message)): ?>
@@ -90,4 +99,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["forgot"])) {
     </div>
 </div>
 
-<?php require __DIR__ . '/../partial/footer.php'; ?>
+</body>
+</html>
