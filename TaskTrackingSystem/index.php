@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
             </div>
 
             <div style="margin-top:-0.5rem; margin-bottom:1rem;">
-                <a href="<?= BASE_URL ?>/views/auth/forgot-password.php"
+                <a href="<?= BASE_URL ?>/views/auth/forgotPassword.php"
                    style="font-size:0.83rem; color:var(--muted);">
                     Forgot password?
                 </a>
