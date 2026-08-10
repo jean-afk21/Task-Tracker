@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["forgot"])) {
 
         if ($token) {
             $appUrl    = getenv('APP_URL') ?: BASE_URL;
-            $resetLink = $appUrl . "/views/auth/reset-password.php?token=" . $token;
+            $resetLink = $appUrl . "/views/auth/resetPassword.php?token=" . $token;
 
             // Try to send email
             sendResetEmail($email, $resetLink);

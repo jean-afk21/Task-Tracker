@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["reset"]) && $validTok
         </form>
         <?php elseif (empty($message)): ?>
             <p style="text-align:center;">
-                <a href="<?= BASE_URL ?>/views/auth/forgot-password.php">Request a new reset link</a>
+                <a href="<?= BASE_URL ?>/views/auth/forgotPassword.php">Request a new reset link</a>
             </p>
         <?php endif; ?>
 
