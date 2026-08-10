@@ -13,7 +13,6 @@ RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/TaskTracking
     /etc/apache2/sites-enabled/000-default.conf && \
     echo '<Directory /var/www/html/TaskTrackingSystem>' >> /etc/apache2/sites-enabled/000-default.conf && \
     echo '    AllowOverride All' >> /etc/apache2/sites-enabled/000-default.conf && \
-    echo '    DirectoryIndex index.php' >> /etc/apache2/sites-enabled/000-default.conf && \
     echo '    Require all granted' >> /etc/apache2/sites-enabled/000-default.conf && \
     echo '</Directory>' >> /etc/apache2/sites-enabled/000-default.conf
 
