@@ -19,6 +19,7 @@ elseif ($currentDir  === 'tasks')          { $active = 'tasks'; }
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antrack</title>
     <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/favicon.ico">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles.css">
 </head>
 <body>
 
