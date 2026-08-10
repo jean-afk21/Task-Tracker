@@ -4,7 +4,7 @@
 require_once __DIR__ . "/../public/database.config.php";
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Resend;
+use Resend\Resend;
 
 class AccountController {
     // Properties
@@ -120,7 +120,7 @@ class AccountController {
     }
 
     try {
-        $resend = Resend::client($apiKey);
+        $resend = new Resend($apiKey);
 
         $resend->emails->send([
             'from' => 'Antrack <onboarding@resend.dev>',
