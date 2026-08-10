@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: antrack
+    runtime: php
+    buildCommand: composer install --no-dev --optimize-autoloader
+    startCommand: php -S 0.0.0.0:$PORT -t TaskTrackingSystem
+    envVars:
+      - key: DB_SERVER
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: BASE_URL
+        value: ""
+      - key: RESEND_API_KEY
+        sync: false
