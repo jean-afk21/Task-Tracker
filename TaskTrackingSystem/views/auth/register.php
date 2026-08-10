@@ -47,7 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["register"])) {
     }
 }
 ?>
-<?php require __DIR__ . '/../partial/header.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antrack — Create Account</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles.css">
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/favicon.ico">
+</head>
+<body>
 
 <div class="auth-container flex-center">
     <div class="card auth-card">
@@ -136,4 +145,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<?php require __DIR__ . '/../partial/footer.php'; ?>
+ </body>
+</html>
