@@ -586,6 +586,43 @@ select:focus {
     margin-top: 6px;
 }
 
+/* Subtle compacting for Add Task form only */
+.form-wrapper .form-card {
+    /* ensure comfortable bottom padding */
+    padding-bottom: 36px;
+}
+
+.form-wrapper .form-group {
+    /* ~22px vertical spacing between fields */
+    margin-bottom: 1.375rem;
+}
+
+.form-wrapper textarea,
+.form-wrapper .form-card textarea {
+    min-height: 120px; /* reduce description height to ~120px */
+    max-height: 160px;
+}
+
+.form-wrapper .btn.btn-primary {
+    width: 140px; /* keep Add Task around 130-140px */
+    justify-content: center;
+}
+
+.form-wrapper .btn.btn-secondary {
+    width: 110px; /* keep Cancel around 100-115px */
+    justify-content: center;
+}
+
+@media (max-width: 700px) {
+    .form-wrapper .btn.btn-primary,
+    .form-wrapper .btn.btn-secondary {
+        width: auto;
+    }
+    .form-wrapper .form-card {
+        padding-bottom: 22px;
+    }
+}
+
 .project-cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
