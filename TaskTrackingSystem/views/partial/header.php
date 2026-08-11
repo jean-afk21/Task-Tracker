@@ -24,60 +24,52 @@ elseif ($currentDir  === 'tasks')          { $active = 'tasks'; }
 <body>
 
 <?php if ($is_logged_in): ?>
-<div class="app-layout">
-    <aside class="app-sidebar">
-        <div class="sidebar-brand">
-            <div class="sidebar-avatar"><?= strtoupper(substr($nav_username ?: 'U', 0, 2)) ?></div>
-            <div>
-                <p class="sidebar-user-name"><?= $nav_username ?></p>
-                <p class="sidebar-user-role">Antrack</p>
-            </div>
-        </div>
-        <nav class="sidebar-nav">
-            <a href="<?= BASE_URL ?>/views/dashboard/dashboard.php"
-               class="sidebar-item <?= $active === 'dashboard' ? 'active' : '' ?>">
-                <span class="sidebar-icon">🏠</span>
-                <span>Dashboard</span>
-            </a>
-            <a href="<?= BASE_URL ?>/views/tasks/index.php"
-               class="sidebar-item <?= $active === 'tasks' ? 'active' : '' ?>">
-                <span class="sidebar-icon">🗂</span>
-                <span>Tasks</span>
-            </a>
-            <a href="<?= BASE_URL ?>/views/tasks/calendar.php"
-               class="sidebar-item <?= $active === 'calendar' ? 'active' : '' ?>">
-                <span class="sidebar-icon">🗓</span>
-                <span>Calendar</span>
-            </a>
-            <a href="<?= BASE_URL ?>/views/tasks/analytics.php"
-               class="sidebar-item <?= $active === 'analytics' ? 'active' : '' ?>">
-                <span class="sidebar-icon">📊</span>
-                <span>Analytics</span>
-            </a>
-        </nav>
-        <div class="sidebar-footer">
-            <a href="<?= BASE_URL ?>/logout.php"
-               class="sidebar-item logout-link"
-               onclick="return confirm('Are you sure you want to log out?');">
-                <span class="sidebar-icon">⇦</span>
-                <span>Logout</span>
-            </a>
-        </div>
-    </aside>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="brand">
+        <img src="<?= BASE_URL ?>/public/images/logo.png" alt="Antrack" onerror="this.outerHTML='<div style=\"width: 38px; height: 38px; background: #82cef5; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-weight: bold; color: #000; font-size: 16px;\">A</div>'">
+        <h2>Antrack</h2>
+    </div>
 
-    <main class="app-main">
-        <header class="app-topbar">
-            <div class="topbar-title">Welcome back, <?= $nav_username ?>.</div>
-        </header>
+    <div class="menu-title">Menu</div>
+
+    <a href="<?= BASE_URL ?>/views/dashboard/dashboard.php" class="nav-item <?= $active === 'dashboard' ? 'active' : '' ?>">
+        <span>🏠</span>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="<?= BASE_URL ?>/views/tasks/index.php" class="nav-item <?= $active === 'tasks' ? 'active' : '' ?>">
+        <span>🗂️</span>
+        <span>Tasks</span>
+    </a>
+
+    <a href="<?= BASE_URL ?>/views/tasks/calendar.php" class="nav-item <?= $active === 'calendar' ? 'active' : '' ?>">
+        <span>🗓️</span>
+        <span>Calendar</span>
+    </a>
+
+    <a href="<?= BASE_URL ?>/views/tasks/analytics.php" class="nav-item <?= $active === 'analytics' ? 'active' : '' ?>">
+        <span>📊</span>
+        <span>Analytics</span>
+    </a>
+
+    <a href="<?= BASE_URL ?>/logout.php" class="nav-item logout" onclick="return confirm('Are you sure you want to log out?');">
+        <span>⇦</span>
+        <span>Logout</span>
+    </a>
+</aside>
 
 <?php else: ?>
-    <nav class="navbar">
-        <div class="container flex-between">
-            <span class="nav-brand">🐜 Antrack</span>
-            <div class="nav-links">
-                <a href="<?= BASE_URL ?>/index.php">Login</a>
-                <a href="<?= BASE_URL ?>/views/auth/register.php">Register</a>
-            </div>
+
+<!-- NAVBAR FOR LOGGED OUT USERS -->
+<nav class="navbar">
+    <div class="container flex-between">
+        <span class="nav-brand">🐜 Antrack</span>
+        <div class="nav-links">
+            <a href="<?= BASE_URL ?>/index.php">Login</a>
+            <a href="<?= BASE_URL ?>/views/auth/register.php">Register</a>
         </div>
-    </nav>
+    </div>
+</nav>
+
 <?php endif; ?>
