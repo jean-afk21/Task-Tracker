@@ -44,16 +44,15 @@ while ($task = $tasks_result->fetch_assoc()) {
                     <p class="section-subtitle">A clean monthly view of your due tasks.</p>
                 </div>
                 <div class="calendar-header-actions">
-                    <button type="button" class="calendar-nav-btn calendar-nav-btn-secondary" id="todayBtn">Today</button>
-                    <button type="button" class="calendar-nav-btn" id="prevBtn" aria-label="Previous month">←</button>
-                    <button type="button" class="calendar-nav-btn" id="nextBtn" aria-label="Next month">→</button>
+                    <button type="button" class="calendar-nav-btn calendar-nav-btn-secondary" id="todayBtn">Go to Today</button>
                 </div>
             </div>
 
             <div class="calendar-period-row">
-                <div class="calendar-period-wrap">
+                <div class="calendar-nav-row">
+                    <button type="button" class="calendar-nav-btn" id="prevBtn" aria-label="Previous month">←</button>
                     <p class="calendar-period" id="calendarPeriodLabel"></p>
-                    <p class="calendar-period-meta">Month view · Weekly deadlines</p>
+                    <button type="button" class="calendar-nav-btn" id="nextBtn" aria-label="Next month">→</button>
                 </div>
             </div>
 

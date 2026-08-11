@@ -1118,7 +1118,9 @@ select:focus {
 .calendar-nav-row {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    justify-content: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
 }
 
 .calendar-nav-btn {
@@ -1134,11 +1136,12 @@ select:focus {
 }
 
 .calendar-period-row {
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.8rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .calendar-period-wrap {
@@ -1147,14 +1150,13 @@ select:focus {
 }
 
 .calendar-period {
-    font-size: 0.98rem;
+    font-size: 1rem;
     font-weight: 700;
+    margin: 0;
 }
 
 .calendar-period-meta {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 0.86rem;
+    display: none;
 }
 
 .calendar-weekdays {
