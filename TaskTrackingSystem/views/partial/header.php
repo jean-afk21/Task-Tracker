@@ -27,8 +27,7 @@ elseif ($currentDir  === 'tasks')          { $active = 'tasks'; }
 <!-- SIDEBAR -->
 <aside class="sidebar">
     <div class="brand">
-        <img src="<?= BASE_URL ?>/public/images/logo.png" alt="Antrack" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="brand-fallback" aria-hidden="true">A</div>
+        <img src="<?= BASE_URL ?>/public/images/logo.png" alt="Antrack">
         <h2>Antrack</h2>
     </div>
 

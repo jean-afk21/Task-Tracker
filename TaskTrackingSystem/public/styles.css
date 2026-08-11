@@ -2678,27 +2678,13 @@ body {
 }
 
 .brand img {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border-radius: 8px;
-}
-
-.brand-fallback {
-    display: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: #82cef5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: #033;
-    font-size: 15px;
 }
 
 .brand h2 {
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .menu-title {
@@ -2795,28 +2781,28 @@ body {
 .welcome-card {
     background: linear-gradient(110deg, #72c5f4, #bdebf9);
     border-radius: 14px;
-    padding: 18px 20px;
+    padding: 16px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     overflow: hidden;
 }
 
 .welcome-card h2 {
-    font-size: 20px;
+    font-size: 18px;
     margin: 0 0 6px 0;
 }
 
 .welcome-card p {
     color: #234;
-    font-size: 13px;
+    font-size: 12px;
     margin: 0;
 }
 
 .welcome-icon {
-    font-size: 46px;
-    opacity: 0.25;
+    font-size: 42px;
+    opacity: 0.28;
 }
 
 /* STATS */
@@ -2827,49 +2813,50 @@ body {
 
 .stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 18px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
 .stat-card {
     background: white;
     border: 1px solid #e4edf2;
     border-radius: 12px;
-    padding: 14px 16px;
+    padding: 12px 14px;
     transition: 0.15s;
 }
 
 .stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transform: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
 }
 
 .stat-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .stat-label {
     color: #777;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1.2;
 }
 
 .stat-icon {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 8px;
     background: #e5f6ff;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .stat-number {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
 }
 
