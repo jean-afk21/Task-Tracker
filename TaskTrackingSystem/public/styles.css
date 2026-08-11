@@ -570,6 +570,22 @@ select:focus {
     margin: 0;
 }
 
+.form-wrapper {
+    max-width: 820px;
+    margin: 0 auto 12px auto;
+    padding: 0 12px;
+}
+
+.form-header {
+    margin-bottom: 12px;
+}
+
+.form-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
 .project-cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

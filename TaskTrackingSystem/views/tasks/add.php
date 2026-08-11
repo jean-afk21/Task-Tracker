@@ -48,16 +48,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_task"])) {
 
 <div class="container section">
 
-    <div class="flex-between mb-2">
-        <h2 class="page-title">Add New Task</h2>
-        <a href="<?= BASE_URL ?>/views/dashboard/dashboard.php" class="btn btn-secondary">&larr; Back to Dashboard</a>
-    </div>
+    <div class="form-wrapper">
+        <div class="form-header">
+            <h2 class="page-title">Add New Task</h2>
+            <p class="form-subtitle">Create a new task and keep track of your progress.</p>
+        </div>
 
-    <?php if (!empty($errors)): ?>
-        <div class="alert alert-danger"><?= htmlspecialchars($errors) ?></div>
-    <?php endif; ?>
+        <?php if (!empty($errors)): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($errors) ?></div>
+        <?php endif; ?>
 
-    <div class="card p-2 form-card">
+        <div class="card p-2 form-card">
         <form method="POST">
             <div class="form-group">
                 <label for="title">Task Title <span style="color:#dc2626;">*</span></label>
