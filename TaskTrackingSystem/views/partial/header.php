@@ -43,7 +43,7 @@ elseif ($currentDir  === 'tasks')          { $active = 'tasks'; }
         <span>Tasks</span>
     </a>
 
-    <a href="<?= BASE_URL ?>/views/tasks/calendar.php" class="nav-item <?= $active === 'calendar' ? 'active' : '' ?>">
+    <a href="<?= BASE_URL ?>/views/calendar.php" class="nav-item <?= $active === 'calendar' ? 'active' : '' ?>">
         <span>🗓️</span>
         <span>Calendar</span>
     </a>
