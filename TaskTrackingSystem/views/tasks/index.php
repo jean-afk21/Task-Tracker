@@ -19,6 +19,7 @@ $tasks = $controller->getAllTasks($account_id, $searchTerm);
 ?>
 <?php require __DIR__ . '/../partial/header.php'; ?>
 
+<main class="main">
 
 <div class="container section tasks-page">
     <section class="card">
@@ -79,5 +80,7 @@ $tasks = $controller->getAllTasks($account_id, $searchTerm);
         <?php endif; ?>
     </section>
 </div>
+
+</main>
 
 <?php require __DIR__ . '/../partial/footer.php'; ?>
