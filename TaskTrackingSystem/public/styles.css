@@ -3049,3 +3049,239 @@ body {
         padding: 22px;
     }
 }
+/* =========================================================
+   DASHBOARD UI POLISH
+   Overrides older dashboard styles
+   ========================================================= */
+
+/* Main dashboard spacing */
+.main {
+    padding: 26px 40px;
+}
+
+/* Top bar */
+.topbar {
+    margin-bottom: 26px;
+}
+
+.welcome-small {
+    font-size: 13px;
+    margin-bottom: 3px;
+    color: #64748b;
+}
+
+.topbar h1 {
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+/* Profile */
+.profile {
+    padding: 7px 13px;
+    gap: 10px;
+}
+
+.profile-icon {
+    width: 36px;
+    height: 36px;
+}
+
+/* Welcome card */
+.welcome-card {
+    min-height: 145px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+}
+
+.welcome-card h2 {
+    font-size: 21px;
+    line-height: 1.3;
+    margin-bottom: 5px;
+}
+
+.welcome-card p {
+    font-size: 13px;
+}
+
+.welcome-icon {
+    font-size: 48px;
+}
+
+.new-task {
+    padding: 8px 15px;
+    font-size: 13px;
+    margin-top: 9px;
+}
+
+/* Overview heading */
+.section-title {
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+/* Overview cards */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+/*
+   IMPORTANT:
+   This selector is more specific than the old
+   ".stat-card span" rule.
+*/
+.main .stats .stat-card .stat-label {
+    font-size: 15px !important;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+/* Stat card itself */
+.main .stats .stat-card {
+    padding: 15px 17px;
+    min-height: 112px;
+    border-radius: 13px;
+    background: #ffffff;
+    border: 1px solid #e1eaf0;
+    box-shadow: 0 5px 18px rgba(15, 23, 42, 0.04);
+}
+
+/* Top section inside stat cards */
+.main .stats .stat-top {
+    margin-bottom: 13px;
+}
+
+/* Icons */
+.main .stats .stat-icon {
+    width: 31px;
+    height: 31px;
+    border-radius: 9px;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+/* Numbers */
+.main .stats .stat-number {
+    font-size: 24px !important;
+    line-height: 1;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Make completion rate fit better */
+.main .stats .stat-card:last-child .stat-label {
+    font-size: 14px !important;
+}
+
+/* Lower dashboard section */
+.content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+
+/* Recent Tasks / Progress cards */
+.content-grid > .card {
+    padding: 17px 19px;
+    border-radius: 13px;
+    min-height: 220px;
+}
+
+/* Card headings */
+.content-grid .card-header {
+    margin-bottom: 10px;
+}
+
+.content-grid .card-header h3 {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.view-all {
+    font-size: 13px;
+}
+
+/* Empty task message */
+.content-grid .card p {
+    font-size: 14px;
+}
+
+/* Progress section */
+.progress-container {
+    margin-top: 18px;
+}
+
+.progress-label {
+    font-size: 13px;
+}
+
+.progress-bar {
+    height: 8px;
+}
+
+/* Prevent unnecessary huge empty areas */
+.content-grid > .card:first-child {
+    min-height: 220px;
+}
+
+.content-grid > .card:last-child {
+    min-height: 220px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+    .main {
+        padding: 24px 28px;
+    }
+
+    .main .stats .stat-card .stat-label {
+        font-size: 14px !important;
+    }
+
+    .main .stats .stat-card:last-child .stat-label {
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .main {
+        margin-left: 70px;
+        padding: 20px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .main .stats .stat-card .stat-label,
+    .main .stats .stat-card:last-child .stat-label {
+        font-size: 14px !important;
+    }
+
+    .welcome-card {
+        min-height: auto;
+        padding: 18px;
+    }
+
+    .welcome-card h2 {
+        font-size: 19px;
+    }
+}
