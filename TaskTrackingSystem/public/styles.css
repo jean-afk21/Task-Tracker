@@ -558,6 +558,18 @@ select:focus {
     padding: 24px 32px;
 }
 
+/* Add task form card sizing */
+.form-card {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 18px;
+}
+
+.page-title {
+    font-size: 30px;
+    margin: 0;
+}
+
 .project-cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -44,10 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_task"])) {
 ?>
 <?php require __DIR__ . '/../partial/header.php'; ?>
 
+<main class="main">
+
 <div class="container section">
 
     <div class="flex-between mb-2">
-        <h2>Add New Task</h2>
+        <h2 class="page-title">Add New Task</h2>
         <a href="<?= BASE_URL ?>/views/dashboard/dashboard.php" class="btn btn-secondary">&larr; Back to Dashboard</a>
     </div>
 
@@ -55,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_task"])) {
         <div class="alert alert-danger"><?= htmlspecialchars($errors) ?></div>
     <?php endif; ?>
 
-    <div class="card p-2" style="max-width:620px;">
+    <div class="card p-2 form-card">
         <form method="POST">
             <div class="form-group">
                 <label for="title">Task Title <span style="color:#dc2626;">*</span></label>
@@ -102,5 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_task"])) {
     </div>
 
 </div>
+
+</main>
 
 <?php require __DIR__ . '/../partial/footer.php'; ?>
