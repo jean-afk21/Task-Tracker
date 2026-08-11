@@ -143,7 +143,7 @@ function formatRecentDate($dateString) {
                     <div class="stat-icon stat-icon-primary">%</div>
                     <p class="stat-label">Completion Rate</p>
                     <h2><?= formatCount($completionRate) ?>%</h2>
-                    <span class="stat-note">Great progress!</span>
+                    <span class="stat-note">of tasks completed</span>
                 </article>
                 <article class="stat-card">
                     <div class="stat-icon stat-icon-secondary">●</div>
