@@ -578,6 +578,13 @@ select:focus {
 
 .form-header {
     margin-bottom: 12px;
+    /* align header content with the inner edge of the centered form card */
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 18px; /* match .form-card padding */
+    padding-right: 18px;
+    box-sizing: border-box;
 }
 
 .form-subtitle {
