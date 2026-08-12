@@ -139,7 +139,7 @@ $counts = $controller->getTaskCounts($account_id);
             <?php else: ?>
                 <?php 
                 $count = 0;
-                while ($task = $tasks->fetch_assoc() && $count < 5): 
+                while ($count < 5 && ($task = $tasks->fetch_assoc())):
                     $count++;
                 ?>
                 <div class="task">
