@@ -44,6 +44,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["complete_task"])) {
 
 $tasks  = $controller->getAllTasks($account_id, $searchTerm);
 $counts = $controller->getTaskCounts($account_id);
+
+$totalCount    = (int)($counts['total'] ?? 0);
+$finishedCount = (int)($counts['finished'] ?? 0);
+$pendingCount  = max(0, $totalCount - $finishedCount);
+$firstName     = strtok(trim($_SESSION['username'] ?? 'there'), ' ');
+
+$hour = (int)date('G');
+if ($hour < 12) {
+    $greeting = 'Good morning';
+} elseif ($hour < 18) {
+    $greeting = 'Good afternoon';
+} else {
+    $greeting = 'Good evening';
+}
+
+if ($motivation !== '') {
+    $welcomeLine = $motivation;
+} elseif ($totalCount === 0) {
+    $welcomeLine = $greeting . ', ' . $firstName . '. Every big climb starts with one small task — add your first one.';
+} elseif ($pendingCount === 0) {
+    $welcomeLine = $greeting . ', ' . $firstName . '. Everything is done — enjoy the view from the top.';
+} elseif ($finishedCount === 0) {
+    $welcomeLine = $greeting . ', ' . $firstName . '. ' . $pendingCount . ' ' . ($pendingCount === 1 ? 'task is' : 'tasks are')
+        . ' waiting — start with the smallest one and momentum does the rest.';
+} elseif ($pendingCount === 1) {
+    $welcomeLine = 'Just one task left, ' . $firstName . '. Finish strong.';
+} else {
+    $welcomeLine = "You've cleared " . $finishedCount . ' of ' . $totalCount . ' — '
+        . $pendingCount . ' to go. Small steps, steady climb.';
+}
 ?>
 <?php require __DIR__ . '/../partial/header.php'; ?>
 
@@ -76,11 +106,42 @@ $counts = $controller->getTaskCounts($account_id);
     <div class="welcome-card">
         <div>
             <h2>Welcome back, <?= htmlspecialchars($_SESSION['username'] ?? 'User') ?>! 👋</h2>
-            <p>Stay organized and keep making progress today.</p>
+            <p><?= htmlspecialchars($welcomeLine) ?></p>
             <a href="<?= BASE_URL ?>/views/tasks/add.php" class="new-task">+ New Task</a>
         </div>
 
-        <div class="welcome-icon">✓</div>
+        <div class="welcome-icon" aria-hidden="true">
+            <svg class="ant-hill" viewBox="0 0 200 120" role="img" aria-label="Ants climbing a hill">
+                <path class="hill-back" d="M0 120 C 45 92, 78 46, 118 26 C 152 9, 178 12, 200 4 L200 120 Z"/>
+                <path class="hill-front" d="M0 120 C 52 108, 92 74, 132 54 C 164 38, 184 34, 200 30 L200 120 Z"/>
+                <g class="ant-trail">
+                    <g transform="translate(46 104) rotate(-24)">
+                        <ellipse cx="-7" cy="0" rx="3.4" ry="2.8"/>
+                        <ellipse cx="0" cy="0" rx="2.6" ry="2.2"/>
+                        <circle cx="5.6" cy="-0.4" r="2.6"/>
+                        <path class="ant-legs" d="M-6 -2 l-3 -4 M-6 2 l-3 4 M0 -2.2 l0 -5 M0 2.2 l0 5 M5 -2.4 l3 -4 M5 2 l3 4 M7 -2.4 l3.4 -4.6 M7.6 -1.2 l4.2 -2.6"/>
+                    </g>
+                    <g transform="translate(92 84) rotate(-30)">
+                        <ellipse cx="-7" cy="0" rx="3.4" ry="2.8"/>
+                        <ellipse cx="0" cy="0" rx="2.6" ry="2.2"/>
+                        <circle cx="5.6" cy="-0.4" r="2.6"/>
+                        <path class="ant-legs" d="M-6 -2 l-3 -4 M-6 2 l-3 4 M0 -2.2 l0 -5 M0 2.2 l0 5 M5 -2.4 l3 -4 M5 2 l3 4 M7 -2.4 l3.4 -4.6 M7.6 -1.2 l4.2 -2.6"/>
+                    </g>
+                    <g transform="translate(136 62) rotate(-28)">
+                        <ellipse cx="-7" cy="0" rx="3.4" ry="2.8"/>
+                        <ellipse cx="0" cy="0" rx="2.6" ry="2.2"/>
+                        <circle cx="5.6" cy="-0.4" r="2.6"/>
+                        <path class="ant-legs" d="M-6 -2 l-3 -4 M-6 2 l-3 4 M0 -2.2 l0 -5 M0 2.2 l0 5 M5 -2.4 l3 -4 M5 2 l3 4 M7 -2.4 l3.4 -4.6 M7.6 -1.2 l4.2 -2.6"/>
+                    </g>
+                    <g class="ant-lead" transform="translate(176 36) rotate(-16)">
+                        <ellipse cx="-7" cy="0" rx="3.4" ry="2.8"/>
+                        <ellipse cx="0" cy="0" rx="2.6" ry="2.2"/>
+                        <circle cx="5.6" cy="-0.4" r="2.6"/>
+                        <path class="ant-legs" d="M-6 -2 l-3 -4 M-6 2 l-3 4 M0 -2.2 l0 -5 M0 2.2 l0 5 M5 -2.4 l3 -4 M5 2 l3 4 M7 -2.4 l3.4 -4.6 M7.6 -1.2 l4.2 -2.6"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
     </div>
 
     <!-- STATS -->
