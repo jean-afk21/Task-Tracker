@@ -105,7 +105,8 @@ function formatRecentDate($dateString) {
 ?>
 <?php require __DIR__ . '/partial/header.php'; ?>
 
-
+<!-- ANALYTICS: START -->
+<!-- View: Task Tracking Analytics dashboard (presentation only) -->
 <div class="container section analytics-page">
     <div class="analytics-grid">
         <main class="analytics-main card">

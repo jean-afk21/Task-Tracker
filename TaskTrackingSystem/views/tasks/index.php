@@ -19,6 +19,8 @@ $tasks = $controller->getAllTasks($account_id, $searchTerm);
 ?>
 <?php require __DIR__ . '/../partial/header.php'; ?>
 
+<!-- TASKS: LIST START -->
+<!-- View: Tasks list and management -->
 <main class="main">
 
 <div class="container section tasks-page">

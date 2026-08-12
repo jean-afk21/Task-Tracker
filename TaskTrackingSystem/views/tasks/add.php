@@ -44,6 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_task"])) {
 ?>
 <?php require __DIR__ . '/../partial/header.php'; ?>
 
+<!-- TASKS: ADD PAGE START -->
+<!-- View: Add new task form -->
 <main class="main">
 
 <div class="container section">

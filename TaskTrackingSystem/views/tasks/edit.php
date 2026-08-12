@@ -59,6 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["edit_task"])) {
 ?>
 <?php require __DIR__ . '/../partial/header.php'; ?>
 
+<!-- TASKS: EDIT PAGE START -->
+<!-- View: Edit existing task -->
 <div class="container section">
 
     <div class="flex-between mb-2">

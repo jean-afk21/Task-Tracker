@@ -47,6 +47,8 @@ $counts = $controller->getTaskCounts($account_id);
 ?>
 <?php require __DIR__ . '/../partial/header.php'; ?>
 
+<!-- DASHBOARD: START -->
+<!-- View: Dashboard overview with recent tasks and progress -->
 <!-- MAIN -->
 <main class="main">
 

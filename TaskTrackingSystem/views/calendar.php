@@ -34,6 +34,8 @@ while ($task = $tasks_result->fetch_assoc()) {
 ?>
 <?php require __DIR__ . '/partial/header.php'; ?>
 
+<!-- CALENDAR: START -->
+<!-- View: Calendar monthly view with task indicators -->
 <div class="container section calendar-page">
     <div class="calendar-shell">
         <main class="calendar-main card">
