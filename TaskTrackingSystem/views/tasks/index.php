@@ -74,7 +74,7 @@ $tasks = $controller->getAllTasks($account_id, $searchTerm);
                             <span class="priority-pill priority-<?= strtolower($task['priority'] ?? 'Medium') ?>">
                                 <?= htmlspecialchars($task['priority'] ?? 'Medium') ?>
                             </span>
-                            <a href="<?= BASE_URL ?>/views/tasks/edit.php?id=<?= (int)$task['id'] ?>" class="btn btn-secondary btn-sm">Adjust</a>
+                            <a href="<?= BASE_URL ?>/views/tasks/edit.php?id=<?= (int)$task['id'] ?>" class="btn btn-secondary btn-sm">Edit</a>
                         </div>
                     </article>
                 <?php endwhile; ?>
