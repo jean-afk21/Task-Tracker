@@ -2631,8 +2631,43 @@ body {
 }
 
 .welcome-icon {
-    font-size: 42px;
-    opacity: 0.28;
+    display: flex;
+    align-items: flex-end;
+    align-self: stretch;
+    min-width: 0;
+    margin: 0 -18px -16px 16px;
+    pointer-events: none;
+}
+
+.ant-hill {
+    display: block;
+    width: 210px;
+    max-width: 100%;
+    height: auto;
+}
+
+.ant-hill .hill-back {
+    fill: rgba(255, 255, 255, 0.3);
+}
+
+.ant-hill .hill-front {
+    fill: rgba(255, 255, 255, 0.5);
+}
+
+.ant-hill .ant-trail {
+    fill: #12405e;
+    opacity: 0.7;
+}
+
+.ant-hill .ant-lead {
+    opacity: 0.95;
+}
+
+.ant-hill .ant-legs {
+    fill: none;
+    stroke: #12405e;
+    stroke-width: 1.2;
+    stroke-linecap: round;
 }
 
 /* STATS */
@@ -2939,7 +2974,7 @@ body {
 }
 
 .welcome-icon {
-    font-size: 48px;
+    margin: 0 -22px -20px 16px;
 }
 
 .new-task {
@@ -3118,6 +3153,10 @@ body {
 
     .welcome-card h2 {
         font-size: 19px;
+    }
+
+    .welcome-icon {
+        display: none;
     }
 }
 /* =========================================================
